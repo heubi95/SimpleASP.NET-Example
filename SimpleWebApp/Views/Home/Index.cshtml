@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        function post() {
+            var data = {};
+            data.Text = document.getElementById("inp").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "http://localhost:51248/api/Value", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify(data));
+        }
+        function put() {
+            var data = {};
+            data.Text = document.getElementById("inp").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("PUT", "http://localhost:51248/api/Value/0", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify(data));
+        }
+        function get() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://localhost:51248/api/Value", true);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.onload = function () {
+                document.getElementById("result").innerText = xhttp.responseText;
+            }
+            xhttp.send();
+        }
+        function deleteRequest() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", "http://localhost:51248/api/Value/0", true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Post/Put</h1><br />
+    <span>New Item:</span><input id="inp" /><button onclick="post();">Add Last(Post)</button><button onclick="put();">Set at 0(Put)</button><br />
+    <h1>Get</h1>
+    <button onclick="get();">Get</button><br />
+    <span>Result:</span>
+    <p id="result"></p><br />
+    <h1>Delete</h1>
+    <button onclick="deleteRequest();">Delete</button>
+</body>
+</html>
